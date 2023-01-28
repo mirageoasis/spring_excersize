@@ -15,23 +15,28 @@ public class Post {
     private Long id;
 
     //제목
+    @Column(nullable = false)
     private String title;
 
     //내용
     @Lob
+    @Column(nullable = false)
     private String content;
+
+    //작성자
+    //
 
     //사진
     // collections로 표기
 
     //익명여부
-    private boolean isAnon;
+    private boolean isAnon = true;
 
     //삭제여부
-    private boolean isDeleted;
+    private boolean isDeleted = false;
 
     // 좋아요 개수
-    private int likeCnt;
+    private int likeCnt = 0;
 
     //최초 작성시간
     private LocalDateTime firstWrittenDate;

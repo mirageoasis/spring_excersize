@@ -16,13 +16,14 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    // create
+    // C
+    @Transactional
     public Long createPost(Post post) {
         postRepository.save(post);
         return post.getId();
     }
 
-    // read
+    // R
     public Post findPost(Long postId){
         return postRepository.findById(postId).get();
     }
@@ -37,7 +38,7 @@ public class PostService {
         return postRepository.findByContentContaining(keyword);
     }
 
-    // update
+    // U
     // 제목 update
     public Long updateContent(Post post){
         Post postToUpdate = findPost(post.getId());
@@ -61,7 +62,7 @@ public class PostService {
 
 
 
-    // delete
+    // D
     public Long deletePost(Long postId){
         Post postToDelete = findPost(postId);
         postToDelete.setDeleted(true);

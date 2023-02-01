@@ -42,11 +42,33 @@ public class FreeboardCommentService {
     // 대댓글 달기
 
     //R
+    @Transactional
+    public Long createNormalReComment(Long childId, Long parentId){
+        // 해당 글번호 설정
+        FreeboardComment childComment = freeboardCommentRepository.findById(childId)
+                .orElseThrow(()-> new IllegalStateException("존재하지 않는 댓글 id"));
+        FreeboardComment parentComment = freeboardCommentRepository.findById(parentId)
+                .orElseThrow(()-> new IllegalStateException("존재하지 않는 댓글 id"));
+
+        childComment.addParent(parentComment);
+        return childId;
+    }
 
 
     //U
-
+    public void updateComment(Long id, String content){
+        FreeboardComment freeboardComment = freeboardCommentRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalStateException("존재하지 않는 댓글 id"));
+        freeboardComment.setContent(content);
+    }
 
     //D
+    public void deleteComment(Long id){
+        FreeboardComment freeboardComment = freeboardCommentRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalStateException("존재하지 않는 댓글 id"));
+        freeboardComment.setDeleted(true);
+    }
 
 }

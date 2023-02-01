@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import test.demo.dto.FreeboardCommentCreateDto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
@@ -34,7 +35,7 @@ public class FreeboardComment {
 
     // 대댓글 모음
     @OneToMany(mappedBy = "parentComment")
-    private List<FreeboardComment> commentList;
+    private List<FreeboardComment> commentList= new ArrayList<>();
 
     //내용
     @Lob

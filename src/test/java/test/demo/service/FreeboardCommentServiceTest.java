@@ -108,16 +108,20 @@ class FreeboardCommentServiceTest {
         // 글 추가
         Long commentId1 =  freeboardCommentService.createNormalComment(dto1);
         Long commentId2 =  freeboardCommentService.createNormalComment(dto2);
+        Long commentId3 =  freeboardCommentService.createNormalComment(dto2);
+
+        // 댓글 추가
+        freeboardCommentService.createNormalReComment(commentId2, commentId1);
+        freeboardCommentService.createNormalReComment(commentId3, commentId1);
 
         //
         entityManager.flush();
 
         // 글 id, 댓글 내용, 비교하기
         //System.out.println(commentId1);
-        System.out.println("원글 id 비교");
-        assertEquals(post.getId(), freeboardCommentRepository.findById(commentId1).get().getPost().getId());
-
-        System.out.println("자신 id 비교");
+        System.out.println("test");
+        assertEquals(2, freeboardCommentRepository.findById(commentId1).get().getCommentList().size());
+        System.out.println("test");
     
     }
 

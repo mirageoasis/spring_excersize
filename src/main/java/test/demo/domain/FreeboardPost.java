@@ -33,20 +33,22 @@ public class FreeboardPost {
     //
 
     //댓글 collection
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<FreeboardComment> commentList = new ArrayList<>();
 
     //사진
     // collections로 표기
 
     //익명여부
-    private boolean isAnon = true;
+    @Column(nullable = false)
+    private Boolean isAnon = true;
 
     //삭제여부
-    private boolean isDeleted = false;
+    @Column(nullable = false)
+    private Boolean isDeleted = false;
 
     // 좋아요 개수
-    private int likeCnt = 0;
+    private Integer likeCnt = 0;
 
     //최초 작성시간
     @CreatedDate
@@ -68,9 +70,9 @@ public class FreeboardPost {
 
     // 수정
     // 나중에 다른 class 넣을 예정
-    public void update(FreeboardPost post){
-        this.title = post.getTitle();
-        this.content = post.getTitle();
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
     }
 
 }
